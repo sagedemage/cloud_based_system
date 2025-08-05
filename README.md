@@ -9,6 +9,11 @@ Install dependencies
 npm install
 ```
 
+Copy the sample-env file to .env
+```
+cp sample-env .env
+```
+
 Start back-end server
 ```
 npm start
