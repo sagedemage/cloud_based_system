@@ -1,5 +1,14 @@
 # cloud_based_system
 
+A system containing an Express server, SQL Server, and DynamoDB.
+
+## Setup
+
+Install dependencies
+```
+npm install
+```
+
 Start back-end server
 ```
 npm start
