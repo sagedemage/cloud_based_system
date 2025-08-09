@@ -4,6 +4,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+const { sequelize, Wave } = require("./models")
+
 const { Sequelize, DataTypes } = require("sequelize");
 
 require("dotenv").config();
@@ -47,27 +49,6 @@ module.exports = app;
 console.log("Back-end server running at http://localhost:3000");
 
 /* Setup Sequelize ORM for SQL Server */
-const db_username = "sa";
-const db_password = process.env.DB_PASSWORD;
-const host = "localhost";
-
-let sequelize = new Sequelize(null, null, null, {
-  host: host,
-  dialect: "mssql",
-  dialectOptions: {
-    server: "localhost",
-    options: {
-      encrypt: false,
-    },
-    authentication: {
-      type: "default",
-      options: {
-        userName: db_username,
-        password: db_password,
-      },
-    },
-  },
-});
 
 try {
   sequelize.authenticate();
@@ -76,37 +57,17 @@ try {
   console.error("Unable to connect to the database: ", error);
 }
 
-let Wave = sequelize.define(
-  "Wave",
-  {
-    frequency: {
-      type: DataTypes.INTEGER,
-      field: "frequency",
-    },
-    frequencyMeas: {
-      type: DataTypes.STRING(5),
-      field: "frequency_meas",
-    },
-    wavelength: {
-      type: DataTypes.INTEGER,
-      field: "wavelength",
-    },
-    wavelengthMeas: {
-      type: DataTypes.STRING(5),
-      field: "wavelength_meas",
-    },
-  },
-  {
-    freezeTableName: true,
-  }
-);
-
 async function query() {
+  // Make sure to synchronize the Wave model in
+  // order to create an entry for it
+  await Wave.sync({ force: true});
   const wave = await Wave.create({
     frequency: 300,
     frequencyMeas: "Ghz",
     wavelength: "100000",
     wavelengthMeas: "km",
+    signalModulation: "AM",
+    UserUuid: "12345"
   });
   console.log("Wave id: ", wave.id);
 
