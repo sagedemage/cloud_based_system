@@ -34,7 +34,7 @@ docker compose up -d
 Use a database management program to manage and administer SQL Server.
 My recommendation is [DBeaver](https://dbeaver.io/) because it works on Linux.
 
-Create a database called `radio_waves` for SQL Server.
+Create a database called `radio_waves` in SQL Server.
 
 ## Docker CLI
 
