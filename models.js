@@ -69,11 +69,11 @@ const User = sequelize.define(
       primaryKey: true
     },
     email: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING,
       field: "email",
     },
     username: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING,
       field: "username",
     },
     password: {
