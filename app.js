@@ -4,9 +4,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-const { sequelize, Wave } = require("./models")
-
-const { Sequelize, DataTypes } = require("sequelize");
+const { sequelize, Wave, User } = require("./models");
+const bcrypt = require("bcrypt");
 
 require("dotenv").config();
 
@@ -58,6 +57,19 @@ try {
 }
 
 async function query() {
+  const salt_rounds = 10;
+  const password = "test1000";
+
+  const hash = await bcrypt.hash(password, salt_rounds);
+
+  await User.sync({ force: true});
+  const user = await User.create({
+    email: "test1000@email.com",
+    username: "test1000",
+    password: hash,
+  });
+  console.log("User id: ", user.id);
+
   // Make sure to synchronize the Wave model in
   // order to create an entry for it
   await Wave.sync({ force: true});
@@ -67,12 +79,19 @@ async function query() {
     wavelength: "100000",
     wavelengthMeas: "km",
     signalModulation: "AM",
-    UserUuid: "12345"
+    userUuid: user.id
   });
   console.log("Wave id: ", wave.id);
 
   const waves = await Wave.findAll();
   console.log("All waves: ", JSON.stringify(waves, null, 2))
+
+  const users = await User.findAll();
+  console.log("All users: ", JSON.stringify(users, null, 2))
+
+  const find_user = await User.findOne({where: { username: "test1000" }})
+  const match = await bcrypt.compare("test1000", find_user.password)
+  console.log(match)
 }
 
 query()

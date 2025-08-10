@@ -49,8 +49,8 @@ const Wave = sequelize.define(
       type: DataTypes.STRING(2),
       field: "signal_modulation",
     },
-    UserUuid: {
-      type: DataTypes.STRING(16),
+    userUuid: {
+      type: DataTypes.UUID,
       field: "user_uuid"
     }
   },
@@ -59,7 +59,35 @@ const Wave = sequelize.define(
   }
 );
 
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true
+    },
+    email: {
+      type: DataTypes.STRING,
+      field: "email",
+    },
+    username: {
+      type: DataTypes.STRING,
+      field: "username",
+    },
+    password: {
+      type: DataTypes.STRING,
+      field: "password",
+    },
+  },
+  {
+    freezeTableName: true,
+  }
+);
+
 module.exports = {
     sequelize,
-    Wave
+    Wave,
+    User
 }
