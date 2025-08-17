@@ -3,6 +3,7 @@ var router = express.Router();
 const { sequelize, Wave, User } = require("../models");
 const bcrypt = require("bcrypt");
 const { random_string } = require("../lib");
+var jwt = require('jsonwebtoken');
 
 /* GET users listing. */
 router.post("/register", async function (req, res, next) {
@@ -49,7 +50,8 @@ router.post("/login", async function (req, res, next) {
     if (match == false) {
       res.send("Error Login!")
     } else if (match == true) {
-      json_response = {"msg": "Login Success", "id": find_user_via_username.id, "code": find_user_via_username.code}
+      const token = jwt.sign({ user_id: find_user_via_username.id, code: find_user_via_username.code }, 'token');
+      json_response = {msg: "Login Success", token: token}
       res.json(json_response)
     }
   } else if (find_user_via_email !== null) {
@@ -57,7 +59,8 @@ router.post("/login", async function (req, res, next) {
     if (match == false) {
       res.send("Error Login!")
     } else if (match == true) {
-      json_response = {"msg": "Login Success", "id": find_user_via_email.id, "code": find_user_via_email.code}
+      const token = jwt.sign({ user_id: find_user_via_email.id, code: find_user_via_email.code }, 'token');
+      json_response = {msg: "Login Success", token: token}
       res.json(json_response)
     }
   } else {
