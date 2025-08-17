@@ -6,6 +6,7 @@ var logger = require("morgan");
 
 const { sequelize, Wave, User } = require("./models");
 const bcrypt = require("bcrypt");
+const { randomBytes } = require("node:crypto");
 
 require("dotenv").config();
 
@@ -56,17 +57,27 @@ try {
   console.error("Unable to connect to the database: ", error);
 }
 
+function random_string(length) {
+  if (length % 2 !== 0) {
+    length += 1
+  }
+  return randomBytes(length / 2).toString("hex")
+}
+
 async function query() {
   const salt_rounds = 10;
   const password = "test1000";
 
   const hash = await bcrypt.hash(password, salt_rounds);
 
+  const code = random_string(26)
+
   await User.sync({ force: true});
   const user = await User.create({
     email: "test1000@email.com",
     username: "test1000",
     password: hash,
+    code: code
   });
   console.log("User id: ", user.id);
 
@@ -79,7 +90,7 @@ async function query() {
     wavelength: "100000",
     wavelengthMeas: "km",
     signalModulation: "AM",
-    userUuid: user.id
+    userId: user.id
   });
   console.log("Wave id: ", wave.id);
 

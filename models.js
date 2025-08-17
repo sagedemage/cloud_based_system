@@ -49,9 +49,9 @@ const Wave = sequelize.define(
       type: DataTypes.STRING(2),
       field: "signal_modulation",
     },
-    userUuid: {
-      type: DataTypes.UUID,
-      field: "user_uuid"
+    userId: {
+      type: DataTypes.INTEGER,
+      field: "user_id"
     }
   },
   {
@@ -62,12 +62,6 @@ const Wave = sequelize.define(
 const User = sequelize.define(
   "User",
   {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
-      primaryKey: true
-    },
     email: {
       type: DataTypes.STRING,
       field: "email",
@@ -79,6 +73,10 @@ const User = sequelize.define(
     password: {
       type: DataTypes.STRING,
       field: "password",
+    },
+    code: {
+      type: DataTypes.STRING(26),
+      field: "code",
     },
   },
   {
