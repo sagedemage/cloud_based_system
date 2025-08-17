@@ -5,13 +5,14 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 const { sequelize, Wave, User } = require("./models");
+const { random_string } = require("./lib")
 const bcrypt = require("bcrypt");
-const { randomBytes } = require("node:crypto");
 
 require("dotenv").config();
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var apiRouter = require("./routes/api");
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/api", apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -55,13 +57,6 @@ try {
   console.log("Connection established successfully.");
 } catch (error) {
   console.error("Unable to connect to the database: ", error);
-}
-
-function random_string(length) {
-  if (length % 2 !== 0) {
-    length += 1
-  }
-  return randomBytes(length / 2).toString("hex")
 }
 
 async function query() {
