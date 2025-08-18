@@ -67,25 +67,18 @@ async function query() {
 
   const code = random_string(26)
 
-  await User.sync({ force: true});
-  const user = await User.create({
-    email: "test1000@email.com",
-    username: "test1000",
-    password: hash,
-    code: code
-  });
-  console.log("User id: ", user.id);
-
-  // Make sure to synchronize the Wave model in
+  // Make sure to synchronize the User model in
   // order to create an entry for it
-  await Wave.sync({ force: true});
+  await User.sync();
+
+  await Wave.sync();
   const wave = await Wave.create({
     frequency: 300,
     frequencyMeas: "Ghz",
     wavelength: "100000",
     wavelengthMeas: "km",
     signalModulation: "AM",
-    userId: user.id
+    userId: 1
   });
   console.log("Wave id: ", wave.id);
 
