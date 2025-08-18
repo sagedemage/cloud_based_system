@@ -88,10 +88,16 @@ async function login_user() {
         document.getElementById("msg-alert").innerText = res.msg;
         document.getElementById("msg-alert").style.display = "block";
       } else if (res.status === "Success") {
+        Cookies.set("token", res.token, {expires: 365})
         window.location.href = "/dashboard";
       }
     } catch (error) {
       console.error(error.message);
     }
   }
+}
+
+function logout() {
+  Cookies.remove('token');
+  window.location.reload();
 }

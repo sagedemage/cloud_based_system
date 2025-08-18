@@ -73,4 +73,27 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
+router.post("/auth", async function (req, res, next) {
+  res.setHeader('Content-Type', 'application/json');
+  const data = req.body;
+  const token = data.token;
+
+  const decoded = jwt.verify(token, "token")
+
+  const user_id = decoded.user_id;
+  const code = decoded.code;
+
+  const find_user = await User.findOne({ where: { id: user_id } });
+
+  const user_code = find_user.code
+
+  if (code === user_code) {
+    json_response = {msg: "User is authenticated", auth: true}
+    res.json(json_response)
+  } else if (code !== user_code) {
+    json_response = {msg: "User is not authenticated", auth: false}
+    res.json(json_response)
+  }
+});
+
 module.exports = router;
