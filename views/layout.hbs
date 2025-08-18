@@ -15,8 +15,11 @@
       </div>
 
       <div id="auth-user" class="auth">
-        <a href="/dashboard" class="nav-link" >Dashboard</a>
-        <button id="logout-button" type="button" onclick="logout()">Logout</button>
+        <button onclick="handle_dropdown()" class="dropdown-btn">Account</button>
+        <div id="dropdown-content">
+          <a href="/dashboard" class="dropdown-link" >Dashboard</a>
+          <a id="logout-button" type="button" onclick="logout()">Logout</a>
+        </div>
       </div>
     </nav>
     <main>

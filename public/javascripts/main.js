@@ -101,3 +101,18 @@ function logout() {
   Cookies.remove('token');
   window.location.reload();
 }
+
+function handle_dropdown() {
+  let display = document.getElementById("dropdown-content").style.display;
+  if (display == "" || display == "none") {
+    document.getElementById("dropdown-content").style.display = "block"
+  } else if (display == "block") {
+    document.getElementById("dropdown-content").style.display = "none"
+  }
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches(".dropdown-btn")) {
+    document.getElementById("dropdown-content").style.display = "none"
+  }
+}

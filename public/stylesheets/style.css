@@ -56,8 +56,34 @@ nav {
 }
 
 #logout-button {
-  background-color: #b6b6b6;
+  background-color: #0077ff;
+  color: white;
+}
+
+.dropdown-btn {
+  background-color: #ff639f;
   color: black;
   border-radius: 5px;
-  border: 5px solid #b6b6b6;
+  border: 5px solid #ff639f;
 }
+
+#dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(212, 212, 212);
+  min-width: 100px;
+  z-index: 1;
+  inset-inline-end: 0px;
+  inset-block-start: 55px;
+}
+
+#dropdown-content > a {
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-link {
+  color: black;
+}
+
