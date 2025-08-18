@@ -60,13 +60,6 @@ try {
 }
 
 async function query() {
-  const salt_rounds = 10;
-  const password = "test1000";
-
-  const hash = await bcrypt.hash(password, salt_rounds);
-
-  const code = random_string(26)
-
   // Make sure to synchronize the User model in
   // order to create an entry for it
   await User.sync();
