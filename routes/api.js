@@ -17,9 +17,11 @@ router.post("/register", async function (req, res, next) {
   const email_exist = await User.findOne({ where: { email: email } });
 
   if (email_exist !== null) {
-    res.send("email exists!");
+    json_response = {msg: "email exists!", status: "Error"}
+    res.json(json_response);
   } else if (username_exist !== null) {
-    res.send("username exists!");
+    json_response = {msg: "username exists!", status: "Error"}
+    res.json(json_response);
   } else {
     const salt_rounds = 10;
     const hash = await bcrypt.hash(password, salt_rounds);
@@ -32,7 +34,8 @@ router.post("/register", async function (req, res, next) {
       code: code,
     });
 
-    res.send("registered a user");
+    json_response = {msg: "registered a user", status: "Success"}
+    res.json(json_response);
   }
 });
 
