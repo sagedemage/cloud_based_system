@@ -1,6 +1,5 @@
 async function check_user_auth() {
   const token = Cookies.get("token");
-  console.log(token)
   if (token === undefined) {
     window.location.href = "/login";
     console.log("Not auth")
@@ -24,7 +23,7 @@ async function check_user_auth() {
       if (res.auth === false) {
         window.location.href = "/login";
       } else if (res.auth === true) {
-        console.log("Auth is true");
+        console.log("User ID: " + res.user_id)
       }
     } catch (error) {
       console.error(error.message);

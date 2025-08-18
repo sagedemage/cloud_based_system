@@ -88,7 +88,7 @@ router.post("/auth", async function (req, res, next) {
   const user_code = find_user.code
 
   if (code === user_code) {
-    json_response = {msg: "User is authenticated", auth: true}
+    json_response = {msg: "User is authenticated", auth: true, user_id: user_id}
     res.json(json_response)
   } else if (code !== user_code) {
     json_response = {msg: "User is not authenticated", auth: false}
