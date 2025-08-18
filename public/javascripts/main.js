@@ -9,11 +9,6 @@ async function register_user() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
   const confirm_pass = document.getElementById("cfm-pass").value;
-  console.log(email);
-  console.log(username);
-  console.log(password);
-  console.log(confirm_pass === "");
-
   const validate = validate_email(email);
 
   if (
@@ -31,7 +26,6 @@ async function register_user() {
     document.getElementById("msg-alert").innerText = "Password do not match!";
     document.getElementById("msg-alert").style.display = "block";
   } else {
-    // /api/register
     const url = "/api/register";
     try {
       const response = await fetch(url, {
@@ -50,7 +44,6 @@ async function register_user() {
       }
 
       const res = await response.json();
-      console.log(res);
       if (res.status === "Error") {
         document.getElementById("msg-alert").innerText = res.msg;
         document.getElementById("msg-alert").style.display = "block";
@@ -74,7 +67,6 @@ async function login_user() {
     document.getElementById("msg-alert").innerText = "Fields must be filled!";
     document.getElementById("msg-alert").style.display = "block";
   } else {
-    // /api/login
     const url = "/api/login";
     try {
       const response = await fetch(url, {
@@ -92,7 +84,6 @@ async function login_user() {
       }
 
       const res = await response.json();
-      console.log(res);
       if (res.status === "Error") {
         document.getElementById("msg-alert").innerText = res.msg;
         document.getElementById("msg-alert").style.display = "block";
