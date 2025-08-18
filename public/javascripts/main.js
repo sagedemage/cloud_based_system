@@ -54,9 +54,50 @@ async function register_user() {
       if (res.status === "Error") {
         document.getElementById("msg-alert").innerText = res.msg;
         document.getElementById("msg-alert").style.display = "block";
+      } else if (res.status === "Success") {
+        window.location.href = "/login";
       }
-      else if (res.status === "Success") {
-           window.location.href = "/login"
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+}
+
+async function login_user() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if (
+    username === "" ||
+    password === ""
+  ) {
+    document.getElementById("msg-alert").innerText = "Fields must be filled!";
+    document.getElementById("msg-alert").style.display = "block";
+  } else {
+    // /api/login
+    const url = "/api/login";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const res = await response.json();
+      console.log(res);
+      if (res.status === "Error") {
+        document.getElementById("msg-alert").innerText = res.msg;
+        document.getElementById("msg-alert").style.display = "block";
+      } else if (res.status === "Success") {
+        window.location.href = "/dashboard";
       }
     } catch (error) {
       console.error(error.message);

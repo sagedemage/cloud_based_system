@@ -51,10 +51,11 @@ router.post("/login", async function (req, res, next) {
   if (find_user_via_username !== null) {
     const match = await bcrypt.compare(password, find_user_via_username.password)
     if (match == false) {
-      res.send("Error Login!")
+      json_response = {msg: "Error Login!", status: "Error"}
+      res.json(json_response)
     } else if (match == true) {
       const token = jwt.sign({ user_id: find_user_via_username.id, code: find_user_via_username.code }, 'token');
-      json_response = {msg: "Login Success", token: token}
+      json_response = {msg: "Login Success", status: "Success", token: token}
       res.json(json_response)
     }
   } else if (find_user_via_email !== null) {
@@ -63,11 +64,12 @@ router.post("/login", async function (req, res, next) {
       res.send("Error Login!")
     } else if (match == true) {
       const token = jwt.sign({ user_id: find_user_via_email.id, code: find_user_via_email.code }, 'token');
-      json_response = {msg: "Login Success", token: token}
+      json_response = {msg: "Login Success", status: "Success", token: token}
       res.json(json_response)
     }
   } else {
-    res.send("Error Login")
+    json_response = {msg: "Error Login!", status: "Error", token: token}
+    res.json(json_response)
   }
 });
 

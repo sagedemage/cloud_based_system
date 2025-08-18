@@ -1,2 +1,10 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}} page.</p>
+
+<form>
+    <p id="msg-alert"></p>
+    <label for="lname">Username:</label>
+    <input type="text" id="username" name="username" class="form-input" value="">
+    <label for="lname">Password:</label>
+    <input type="password" id="password" name="password" class="form-input" value="">
+    <button type="button" onclick="login_user()" class="form-button">Submit</button>
+</form>
