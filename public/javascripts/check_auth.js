@@ -2,7 +2,6 @@ async function check_user_auth() {
   const token = Cookies.get("token");
   if (token === undefined) {
     window.location.href = "/login";
-    console.log("Not auth")
   } else {
     const url = "/api/auth";
     try {
