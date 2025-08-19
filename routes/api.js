@@ -96,4 +96,27 @@ router.post("/auth", async function (req, res, next) {
   }
 });
 
+router.post("/add-wave", async function (req, res, next) {
+  res.setHeader('Content-Type', 'application/json');
+  const data = req.body;
+  const frequency = data.frequency;
+  const frequency_meas = data.frequency_meas;
+  const wavelength = data.wavelength;
+  const wavelength_meas = data.wavelength_meas;
+  const signal_modulation = data.signal_modulation;
+  const user_id = data.user_id;
+
+  const wave = await Wave.create({
+    frequency: frequency,
+    frequencyMeas: frequency_meas,
+    wavelength: wavelength,
+    wavelengthMeas: wavelength_meas,
+    signalModulation: signal_modulation,
+    userId: user_id
+  });
+
+  json_response = {msg: "Wave added", status: "Success"}
+  res.json(json_response)
+});
+
 module.exports = router;

@@ -60,10 +60,7 @@ async function login_user() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  if (
-    username === "" ||
-    password === ""
-  ) {
+  if (username === "" || password === "") {
     document.getElementById("msg-alert").innerText = "Fields must be filled!";
     document.getElementById("msg-alert").style.display = "block";
   } else {
@@ -88,7 +85,7 @@ async function login_user() {
         document.getElementById("msg-alert").innerText = res.msg;
         document.getElementById("msg-alert").style.display = "block";
       } else if (res.status === "Success") {
-        Cookies.set("token", res.token, {expires: 365})
+        Cookies.set("token", res.token, { expires: 365 });
         window.location.href = "/dashboard";
       }
     } catch (error) {
@@ -98,21 +95,108 @@ async function login_user() {
 }
 
 function logout() {
-  Cookies.remove('token');
+  Cookies.remove("token");
   window.location.reload();
 }
 
 function handle_dropdown() {
   let display = document.getElementById("dropdown-content").style.display;
   if (display == "" || display == "none") {
-    document.getElementById("dropdown-content").style.display = "block"
+    document.getElementById("dropdown-content").style.display = "block";
   } else if (display == "block") {
-    document.getElementById("dropdown-content").style.display = "none"
+    document.getElementById("dropdown-content").style.display = "none";
   }
 }
 
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (!event.target.matches(".dropdown-btn")) {
-    document.getElementById("dropdown-content").style.display = "none"
+    document.getElementById("dropdown-content").style.display = "none";
+  }
+};
+
+async function get_user_id() {
+  const token = Cookies.get("token");
+  let user_id = 0;
+  if (token === undefined) {
+    return null
+  } else {
+    const url = "/api/auth";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const res = await response.json();
+      if (res.auth === false) {
+        return null
+      } else if (res.auth === true) {
+        user_id = res.user_id;
+      }
+    } catch (error) {
+      return null
+    }
+  }
+  return user_id
+}
+
+async function add_wave() {
+  const frequency_str = document.getElementById("frequency").value;
+  const frequency = parseInt(frequency_str);
+  const frequency_meas = document.getElementById("frequency_meas").value;
+  const wavelength_str = document.getElementById("wavelength").value;
+  const wavelength = parseInt(wavelength_str);
+  const wavelength_meas = document.getElementById("wavelength_meas").value;
+  const signal_modulation = document.getElementById("signal_modulation").value;
+  const user_id = await get_user_id();
+
+  console.log(typeof frequency)
+  console.log(typeof wavelength)
+
+  if (frequency === "" || wavelength === "") {
+    document.getElementById("msg-alert").innerText = "Fields must be filled!";
+    document.getElementById("msg-alert").style.display = "block";
+  } else if (user_id === null) {
+    document.getElementById("msg-alert").innerText = "User must be authenticated!";
+    document.getElementById("msg-alert").style.display = "block";
+  } else {
+    const url = "/api/add-wave";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          frequency: frequency,
+          frequency_meas: frequency_meas,
+          wavelength: wavelength,
+          wavelength_meas: wavelength_meas,
+          signal_modulation: signal_modulation,
+          user_id: user_id,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const res = await response.json();
+      if (res.status === "Error") {
+        document.getElementById("msg-alert").innerText = res.msg;
+        document.getElementById("msg-alert").style.display = "block";
+      } else if (res.status === "Success") {
+        window.location.href = "/dashboard";
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 }

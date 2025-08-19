@@ -22,4 +22,8 @@ router.get('/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Dashboard' });
 });
 
+router.get('/add-wave', function(req, res, next) {
+  res.render('add_wave', { title: 'Add Wave' });
+});
+
 module.exports = router;
