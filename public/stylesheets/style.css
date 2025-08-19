@@ -22,3 +22,68 @@ nav {
   color: white;
   text-decoration: none;
 }
+
+.auth {
+  float: right;
+}
+
+.form-input {
+  margin-bottom: 20px;
+  display: block;
+  width: 25%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.form-button {
+  background-color: #005cd4;
+  color: white;
+  border-radius: 5px;
+  border: 5px solid #005cd4;
+}
+
+#msg-alert {
+  border: 1px solid rgb(255, 157, 157);
+  background-color: rgb(255, 200, 200);
+  color: darkred;
+  border-radius: 5px;
+  padding: 10px;
+  display: none;
+}
+
+#auth-user {
+  display: none;
+}
+
+#logout-button {
+  background-color: #0077ff;
+  color: white;
+}
+
+.dropdown-btn {
+  background-color: #ff639f;
+  color: black;
+  border-radius: 5px;
+  border: 5px solid #ff639f;
+}
+
+#dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(212, 212, 212);
+  min-width: 100px;
+  z-index: 1;
+  inset-inline-end: 0px;
+  inset-block-start: 55px;
+}
+
+#dropdown-content > a {
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-link {
+  color: black;
+}
+

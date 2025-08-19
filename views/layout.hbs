@@ -8,9 +8,25 @@
     <nav>
       <a href="/" class="nav-link">Home</a>
       <a href="/about" class="nav-link" >About</a>
+
+      <div id="nonauth-user" class="auth">
+        <a href="/register" class="nav-link" >Register</a>
+        <a href="/login" class="nav-link" >Login</a>
+      </div>
+
+      <div id="auth-user" class="auth">
+        <button onclick="handle_dropdown()" class="dropdown-btn">Account</button>
+        <div id="dropdown-content">
+          <a href="/dashboard" class="dropdown-link" >Dashboard</a>
+          <a id="logout-button" type="button" onclick="logout()">Logout</a>
+        </div>
+      </div>
     </nav>
     <main>
       {{{body}}}
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/nav_auth.js"></script>
   </body>
 </html>
