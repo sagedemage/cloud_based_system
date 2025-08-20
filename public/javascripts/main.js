@@ -118,7 +118,7 @@ async function get_user_id() {
   const token = Cookies.get("token");
   let user_id = 0;
   if (token === undefined) {
-    return null
+    return null;
   } else {
     const url = "/api/auth";
     try {
@@ -137,15 +137,15 @@ async function get_user_id() {
 
       const res = await response.json();
       if (res.auth === false) {
-        return null
+        return null;
       } else if (res.auth === true) {
         user_id = res.user_id;
       }
     } catch (error) {
-      return null
+      return null;
     }
   }
-  return user_id
+  return user_id;
 }
 
 async function add_wave() {
@@ -162,7 +162,8 @@ async function add_wave() {
     document.getElementById("msg-alert").innerText = "Fields must be filled!";
     document.getElementById("msg-alert").style.display = "block";
   } else if (user_id === null) {
-    document.getElementById("msg-alert").innerText = "User must be authenticated!";
+    document.getElementById("msg-alert").innerText =
+      "User must be authenticated!";
     document.getElementById("msg-alert").style.display = "block";
   } else {
     const url = "/api/add-wave";
@@ -228,6 +229,51 @@ async function edit_wave() {
           wavelength: wavelength,
           wavelength_meas: wavelength_meas,
           signal_modulation: signal_modulation,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const res = await response.json();
+      if (res.status === "Error") {
+        document.getElementById("msg-alert").innerText = res.msg;
+        document.getElementById("msg-alert").style.display = "block";
+      } else if (res.status === "Success") {
+        window.location.href = "/dashboard";
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+}
+
+const delete_buttons = document.querySelectorAll(".delete-button");
+
+delete_buttons.forEach(function (delete_button) {
+  delete_button.addEventListener("click", (event) => {
+    const wave_id = event.target.attributes[0].value;
+    console.log(wave_id);
+
+    if (wave_id !== "") {
+      delete_wave(wave_id);
+    }
+  });
+});
+
+async function delete_wave(wave_id) {
+  let confirm_delete_wave = confirm("Do you really want to delete the wave?");
+
+  if (confirm_delete_wave === true) {
+    const url = "/api/delete-wave";
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          wave_id: wave_id,
         }),
       });
       if (!response.ok) {

@@ -181,4 +181,17 @@ router.patch("/edit-wave", async function (req, res, next) {
   res.json(json_response);
 });
 
+router.delete("/delete-wave", async function (req, res, next) {
+  res.setHeader("Content-Type", "application/json");
+  const data = req.body;
+  const wave_id = data.wave_id;
+
+  await Wave.destroy({
+    where: { id: wave_id }
+  });
+
+  json_response = { msg: "Deleted the wave", status: "Success" };
+  res.json(json_response);
+});
+
 module.exports = router;
