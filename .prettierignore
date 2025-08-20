@@ -4,7 +4,6 @@
 *.md
 *.ico
 *.webp
-*.hbs
 package.json
 package-lock.json
 .prettierrc.json
