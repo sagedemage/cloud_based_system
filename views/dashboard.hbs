@@ -10,7 +10,7 @@
             Wavelength: {{this.wavelength}} {{this.wavelengthMeas}}<br>
             Singal Modulation: {{this.signalModulation}}
         </p>
-        <button data-waveid="{{this.id}}">Edit</button>
+        <button onclick="location.href = '/edit-wave?wave-id={{this.id}}'">Edit</button>
         <button data-waveid="{{this.id}}" class="delete-button">Delete</button>
     </div>
 {{/each}}

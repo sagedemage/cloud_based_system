@@ -1,0 +1,38 @@
+<h1>{{title}}</h1>
+
+<form>
+    <p id="msg-alert"></p>
+    <label for="frequency">Frequency:</label>
+    <input type="number" id="frequency" name="frequency" class="form-input" value="">
+
+    <select name="frequency_meas" id="frequency_meas" class="form-select">
+        <option value="Hz">Hz</option>
+        <option value="kHz">kHz</option>
+        <option value="MHz">MHz</option>
+        <option value="GHz">GHz</option>
+    </select>
+
+    <label for="wavelength">Wavelength:</label>
+    <input type="number" id="wavelength" name="wavelength" class="form-input" value="">
+
+    <select name="wavelength_meas" id="wavelength_meas" class="form-select">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="dm">dm</option>
+        <option value="m">m</option>
+        <option value="km">km</option>
+    </select>
+
+    <label for="signal_modulation">Signal Modulation:</label>
+
+    <select name="signal_modulation" id="signal_modulation" class="form-select">
+        <option value="AM">AM</option>
+        <option value="FM">FM</option>
+    </select>
+
+    <button type="button" onclick="edit_wave()">Submit</button>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script src="javascripts/check_auth.js"></script>
+<script src="javascripts/fetch_wave.js"></script>

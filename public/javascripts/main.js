@@ -158,9 +158,6 @@ async function add_wave() {
   const signal_modulation = document.getElementById("signal_modulation").value;
   const user_id = await get_user_id();
 
-  console.log(typeof frequency)
-  console.log(typeof wavelength)
-
   if (frequency === "" || wavelength === "") {
     document.getElementById("msg-alert").innerText = "Fields must be filled!";
     document.getElementById("msg-alert").style.display = "block";
@@ -182,6 +179,55 @@ async function add_wave() {
           wavelength_meas: wavelength_meas,
           signal_modulation: signal_modulation,
           user_id: user_id,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const res = await response.json();
+      if (res.status === "Error") {
+        document.getElementById("msg-alert").innerText = res.msg;
+        document.getElementById("msg-alert").style.display = "block";
+      } else if (res.status === "Success") {
+        window.location.href = "/dashboard";
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+}
+
+async function edit_wave() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const wave_id = parseInt(searchParams.get("wave-id"));
+
+  const frequency_str = document.getElementById("frequency").value;
+  const frequency = parseInt(frequency_str);
+  const frequency_meas = document.getElementById("frequency_meas").value;
+  const wavelength_str = document.getElementById("wavelength").value;
+  const wavelength = parseInt(wavelength_str);
+  const wavelength_meas = document.getElementById("wavelength_meas").value;
+  const signal_modulation = document.getElementById("signal_modulation").value;
+
+  if (frequency === "" || wavelength === "") {
+    document.getElementById("msg-alert").innerText = "Fields must be filled!";
+    document.getElementById("msg-alert").style.display = "block";
+  } else {
+    const url = "/api/edit-wave";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          wave_id: wave_id,
+          frequency: frequency,
+          frequency_meas: frequency_meas,
+          wavelength: wavelength,
+          wavelength_meas: wavelength_meas,
+          signal_modulation: signal_modulation,
         }),
       });
       if (!response.ok) {

@@ -46,4 +46,8 @@ router.get('/add-wave', function(req, res, next) {
   res.render('add_wave', { title: 'Add Wave' });
 });
 
+router.get('/edit-wave', function(req, res, next) {
+  res.render('edit_wave', { title: 'Edit Wave' });
+});
+
 module.exports = router;
