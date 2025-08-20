@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 const { sequelize, Wave, User } = require("../models");
+const { get_cookie_value } = require("../lib");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -19,17 +20,6 @@ router.get('/login', function(req, res, next) {
 router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Register' });
 });
-
-function get_cookie_value(cookie, cname) {
-  let values = {}
-  let temp_values = cookie.split("; ")
-  for (const value of temp_values) {
-    let key_value = value.split("=")
-    const key = key_value[0];
-    values[key] = key_value[1]
-  }
-  return values[cname];
-}
 
 router.get('/dashboard', async function(req, res, next) {
   const cookie = req.headers.cookie;
