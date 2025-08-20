@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "lint": "npx eslint *.js routes/*.js",
+    "lint": "npx eslint *.js routes/*.js public/javascripts/*.js",
     "format-check": "npx prettier . --check",
     "format": "npx prettier . --write"
   },
