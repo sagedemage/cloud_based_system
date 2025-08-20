@@ -18,4 +18,4 @@ jobs:
     - name: Install modules
       run: npm install
     - name: Run ESLint
-      run: npx eslint *.js routes/*.js
+      run: npx eslint *.js routes/*.js public/javascripts/*.j
