@@ -1,0 +1,15 @@
+*.yml
+*.yaml
+*.ts
+*.md
+*.ico
+*.webp
+*.hbs
+package.json
+package-lock.json
+.prettierrc.json
+.prettierignore
+.prettierrc
+.editorconfig
+.gitignore
+LICENSE
