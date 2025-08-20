@@ -1,4 +1,19 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}} page.</p>
+
+<button id="add-button" onclick="location.href = '/add-wave'">Add Wave</button>
+
+{{#each waves}}
+    <div>
+        <p>
+            Frequency: {{this.frequency}} {{this.frequencyMeas}}<br>
+            Wavelength: {{this.wavelength}} {{this.wavelengthMeas}}<br>
+            Singal Modulation: {{this.signalModulation}}
+        </p>
+        <button onclick="location.href = '/edit-wave?wave-id={{this.id}}'">Edit</button>
+        <button data-waveid="{{this.id}}" class="delete-button">Delete</button>
+    </div>
+{{/each}}
+
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <script src="javascripts/check_auth.js"></script>

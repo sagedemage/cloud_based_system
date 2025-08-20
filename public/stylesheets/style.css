@@ -15,6 +15,10 @@ a {
 nav {
   background-color: black;
   padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .nav-link {
@@ -33,13 +37,6 @@ nav {
   width: 25%;
   padding-top: 5px;
   padding-bottom: 5px;
-}
-
-.form-button {
-  background-color: #005cd4;
-  color: white;
-  border-radius: 5px;
-  border: 5px solid #005cd4;
 }
 
 #msg-alert {
@@ -63,8 +60,8 @@ nav {
 .dropdown-btn {
   background-color: #ff639f;
   color: black;
-  border-radius: 5px;
   border: 5px solid #ff639f;
+  margin-right: 60px;
 }
 
 #dropdown-content {
@@ -73,7 +70,7 @@ nav {
   background-color: rgb(212, 212, 212);
   min-width: 100px;
   z-index: 1;
-  inset-inline-end: 0px;
+  inset-inline-end: 50px;
   inset-block-start: 55px;
 }
 
@@ -87,3 +84,25 @@ nav {
   color: black;
 }
 
+button {
+  background-color: #005cd4;
+  color: white;
+  border-radius: 5px;
+  border: 5px solid #005cd4;
+}
+
+.form-select {
+  margin-bottom: 20px;
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.delete-button {
+  background-color: #d40000;
+  border: 5px solid #d40000;
+}
+
+main {
+  margin-top: 85px;
+}
