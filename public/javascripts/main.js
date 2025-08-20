@@ -19,7 +19,7 @@ async function register_user() {
   ) {
     document.getElementById("msg-alert").innerText = "Fields must be filled!";
     document.getElementById("msg-alert").style.display = "block";
-  } else if (validate == null) {
+  } else if (validate === null) {
     document.getElementById("msg-alert").innerText = "Invalid email format!";
     document.getElementById("msg-alert").style.display = "block";
   } else if (password !== confirm_pass) {
@@ -101,9 +101,9 @@ function logout() {
 
 function handle_dropdown() {
   let display = document.getElementById("dropdown-content").style.display;
-  if (display == "" || display == "none") {
+  if (display === "" || display === "none") {
     document.getElementById("dropdown-content").style.display = "block";
-  } else if (display == "block") {
+  } else if (display === "block") {
     document.getElementById("dropdown-content").style.display = "none";
   }
 }

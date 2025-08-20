@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
-const { sequelize, Wave, User } = require("../models");
+const { Wave, User } = require("../models");
 const bcrypt = require("bcrypt");
 const { random_string } = require("../lib");
 var jwt = require("jsonwebtoken");
 
 /* GET users listing. */
-router.post("/register", async function (req, res, next) {
+router.post("/register", async function (req, res, _next) {
   res.setHeader("Content-Type", "application/json");
   const data = req.body;
   const email = data.email;
@@ -17,29 +17,29 @@ router.post("/register", async function (req, res, next) {
   const email_exist = await User.findOne({ where: { email: email } });
 
   if (email_exist !== null) {
-    json_response = { msg: "email exists!", status: "Error" };
+    const json_response = { msg: "email exists!", status: "Error" };
     res.json(json_response);
   } else if (username_exist !== null) {
-    json_response = { msg: "username exists!", status: "Error" };
+    const json_response = { msg: "username exists!", status: "Error" };
     res.json(json_response);
   } else {
     const salt_rounds = 10;
     const hash = await bcrypt.hash(password, salt_rounds);
     const code = random_string(26);
 
-    const user = await User.create({
+    await User.create({
       email: email,
       username: username,
       password: hash,
       code: code,
     });
 
-    json_response = { msg: "registered a user", status: "Success" };
+    const json_response = { msg: "registered a user", status: "Success" };
     res.json(json_response);
   }
 });
 
-router.post("/login", async function (req, res, next) {
+router.post("/login", async function (req, res, _next) {
   res.setHeader("Content-Type", "application/json");
   const data = req.body;
   const username = data.username;
@@ -57,10 +57,10 @@ router.post("/login", async function (req, res, next) {
       password,
       find_user_via_username.password
     );
-    if (match == false) {
-      json_response = { msg: "Error Login!", status: "Error" };
+    if (match === false) {
+      const json_response = { msg: "Error Login!", status: "Error" };
       res.json(json_response);
-    } else if (match == true) {
+    } else if (match === true) {
       const token = jwt.sign(
         {
           user_id: find_user_via_username.id,
@@ -68,28 +68,36 @@ router.post("/login", async function (req, res, next) {
         },
         "token"
       );
-      json_response = { msg: "Login Success", status: "Success", token: token };
+      const json_response = {
+        msg: "Login Success",
+        status: "Success",
+        token: token,
+      };
       res.json(json_response);
     }
   } else if (find_user_via_email !== null) {
     const match = await bcrypt.compare(password, find_user_via_email.password);
-    if (match == false) {
+    if (match === false) {
       res.send("Error Login!");
-    } else if (match == true) {
+    } else if (match === true) {
       const token = jwt.sign(
         { user_id: find_user_via_email.id, code: find_user_via_email.code },
         "token"
       );
-      json_response = { msg: "Login Success", status: "Success", token: token };
+      const json_response = {
+        msg: "Login Success",
+        status: "Success",
+        token: token,
+      };
       res.json(json_response);
     }
   } else {
-    json_response = { msg: "Error Login!", status: "Error", token: token };
+    const json_response = { msg: "Error Login!", status: "Error" };
     res.json(json_response);
   }
 });
 
-router.post("/auth", async function (req, res, next) {
+router.post("/auth", async function (req, res, _next) {
   res.setHeader("Content-Type", "application/json");
   const data = req.body;
   const token = data.token;
@@ -104,19 +112,19 @@ router.post("/auth", async function (req, res, next) {
   const user_code = find_user.code;
 
   if (code === user_code) {
-    json_response = {
+    const json_response = {
       msg: "User is authenticated",
       auth: true,
       user_id: user_id,
     };
     res.json(json_response);
   } else if (code !== user_code) {
-    json_response = { msg: "User is not authenticated", auth: false };
+    const json_response = { msg: "User is not authenticated", auth: false };
     res.json(json_response);
   }
 });
 
-router.post("/add-wave", async function (req, res, next) {
+router.post("/add-wave", async function (req, res, _next) {
   res.setHeader("Content-Type", "application/json");
   const data = req.body;
   const frequency = data.frequency;
@@ -126,7 +134,7 @@ router.post("/add-wave", async function (req, res, next) {
   const signal_modulation = data.signal_modulation;
   const user_id = data.user_id;
 
-  const wave = await Wave.create({
+  await Wave.create({
     frequency: frequency,
     frequencyMeas: frequency_meas,
     wavelength: wavelength,
@@ -135,18 +143,18 @@ router.post("/add-wave", async function (req, res, next) {
     userId: user_id,
   });
 
-  json_response = { msg: "Wave added", status: "Success" };
+  const json_response = { msg: "Wave added", status: "Success" };
   res.json(json_response);
 });
 
-router.post("/get-wave", async function (req, res, next) {
+router.post("/get-wave", async function (req, res, _next) {
   res.setHeader("Content-Type", "application/json");
   const data = req.body;
   const wave_id = data.wave_id;
 
   const find_wave = await Wave.findOne({ where: { id: wave_id }, raw: true });
 
-  json_response = {
+  const json_response = {
     frequency: find_wave.frequency,
     frequency_meas: find_wave.frequencyMeas,
     wavelength: find_wave.wavelength,
@@ -156,7 +164,7 @@ router.post("/get-wave", async function (req, res, next) {
   res.json(json_response);
 });
 
-router.patch("/edit-wave", async function (req, res, next) {
+router.patch("/edit-wave", async function (req, res, _next) {
   res.setHeader("Content-Type", "application/json");
   const data = req.body;
   const wave_id = data.wave_id;
@@ -177,20 +185,20 @@ router.patch("/edit-wave", async function (req, res, next) {
     { where: { id: wave_id } }
   );
 
-  json_response = { msg: "Updated the wave", status: "Success" };
+  const json_response = { msg: "Updated the wave", status: "Success" };
   res.json(json_response);
 });
 
-router.delete("/delete-wave", async function (req, res, next) {
+router.delete("/delete-wave", async function (req, res, _next) {
   res.setHeader("Content-Type", "application/json");
   const data = req.body;
   const wave_id = data.wave_id;
 
   await Wave.destroy({
-    where: { id: wave_id }
+    where: { id: wave_id },
   });
 
-  json_response = { msg: "Deleted the wave", status: "Success" };
+  const json_response = { msg: "Deleted the wave", status: "Success" };
   res.json(json_response);
 });
 

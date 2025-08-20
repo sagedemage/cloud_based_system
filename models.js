@@ -51,8 +51,8 @@ const Wave = sequelize.define(
     },
     userId: {
       type: DataTypes.INTEGER,
-      field: "user_id"
-    }
+      field: "user_id",
+    },
   },
   {
     freezeTableName: true,
@@ -85,7 +85,7 @@ const User = sequelize.define(
 );
 
 module.exports = {
-    sequelize,
-    Wave,
-    User
-}
+  sequelize,
+  Wave,
+  User,
+};

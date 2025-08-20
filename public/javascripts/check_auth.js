@@ -21,7 +21,7 @@ async function check_user_auth() {
       const res = await response.json();
       if (res.auth === false) {
         window.location.href = "/login";
-      } 
+      }
     } catch (error) {
       console.error(error.message);
     }

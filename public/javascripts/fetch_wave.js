@@ -1,8 +1,12 @@
 async function get_wave_data() {
   const searchParams = new URLSearchParams(window.location.search);
-  const wave_id_str = searchParams.get("wave-id")
+  const wave_id_str = searchParams.get("wave-id");
 
-  if (wave_id_str === null || wave_id_str === "" || isNaN(wave_id_str) === true) {
+  if (
+    wave_id_str === null ||
+    wave_id_str === "" ||
+    isNaN(wave_id_str) === true
+  ) {
     location.href = "/dashboard";
   } else {
     const wave_id = parseInt(wave_id_str);

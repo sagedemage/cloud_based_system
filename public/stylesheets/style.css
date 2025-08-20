@@ -1,5 +1,10 @@
 body {
-  font: 14px Helvetica, Verdana, Tahoma, Arial, sans-serif;
+  font:
+    14px Helvetica,
+    Verdana,
+    Tahoma,
+    Arial,
+    sans-serif;
   margin: 0;
 }
 
@@ -9,7 +14,7 @@ main {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
 }
 
 nav {

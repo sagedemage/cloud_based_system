@@ -5,8 +5,6 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 const { sequelize, Wave, User } = require("./models");
-const { random_string } = require("./lib")
-const bcrypt = require("bcrypt");
 
 require("dotenv").config();
 
@@ -36,7 +34,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res, _next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -67,4 +65,4 @@ async function query() {
   await Wave.sync();
 }
 
-query()
+query();
