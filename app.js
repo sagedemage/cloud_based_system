@@ -65,25 +65,6 @@ async function query() {
   await User.sync();
 
   await Wave.sync();
-  const wave = await Wave.create({
-    frequency: 300,
-    frequencyMeas: "Ghz",
-    wavelength: "100000",
-    wavelengthMeas: "km",
-    signalModulation: "AM",
-    userId: 1
-  });
-  console.log("Wave id: ", wave.id);
-
-  const waves = await Wave.findAll();
-  console.log("All waves: ", JSON.stringify(waves, null, 2))
-
-  const users = await User.findAll();
-  console.log("All users: ", JSON.stringify(users, null, 2))
-
-  const find_user = await User.findOne({where: { username: "test1000" }})
-  const match = await bcrypt.compare("test1000", find_user.password)
-  console.log(match)
 }
 
 query()
