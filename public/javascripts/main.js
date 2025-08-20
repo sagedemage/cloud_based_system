@@ -253,7 +253,6 @@ const delete_buttons = document.querySelectorAll(".delete-button");
 delete_buttons.forEach(function (delete_button) {
   delete_button.addEventListener("click", (event) => {
     const wave_id = event.target.attributes[0].value;
-    console.log(wave_id);
 
     if (wave_id !== "") {
       delete_wave(wave_id);
