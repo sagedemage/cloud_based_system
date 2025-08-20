@@ -11,12 +11,6 @@
   "plugins": [],
   "overrides": [
   {
-    "files": "*.astro",
-    "options": {
-      "parser": "astro"
-    }
-  },
-  {
     "files": "*.css",
     "options": {
       "parser": "css"
