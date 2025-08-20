@@ -156,7 +156,7 @@ router.post("/get-wave", async function (req, res, next) {
   res.json(json_response);
 });
 
-router.post("/edit-wave", async function (req, res, next) {
+router.patch("/edit-wave", async function (req, res, next) {
   res.setHeader("Content-Type", "application/json");
   const data = req.body;
   const wave_id = data.wave_id;

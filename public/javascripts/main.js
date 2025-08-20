@@ -217,7 +217,7 @@ async function edit_wave() {
     const url = "/api/edit-wave";
     try {
       const response = await fetch(url, {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
