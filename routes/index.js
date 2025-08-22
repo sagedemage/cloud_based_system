@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
-const { Wave } = require("../models");
+const { Wave } = require("../sql_server_models");
 const { get_cookie_value } = require("../lib");
 
 /* GET home page. */
@@ -24,12 +24,17 @@ router.get("/register", function (_req, res, _next) {
 router.get("/dashboard", async function (req, res, _next) {
   const cookie = req.headers.cookie;
   const token = get_cookie_value(cookie, "token");
-  const decoded = jwt.verify(token, "token");
-  const user_id = decoded.user_id;
 
-  const waves = await Wave.findAll({ where: { userId: user_id }, raw: true });
+  if (token === null) {
+    res.render("dashboard", { title: "Dashboard" });
+  } else {
+    const decoded = jwt.verify(token, "token");
+    const user_id = decoded.user_id;
 
-  res.render("dashboard", { title: "Dashboard", waves: waves });
+    const waves = await Wave.findAll({ where: { userId: user_id }, raw: true });
+
+    res.render("dashboard", { title: "Dashboard", waves: waves });
+  }
 });
 
 router.get("/add-wave", function (_req, res, _next) {

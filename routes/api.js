@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-const { Wave, User } = require("../models");
+const { Wave, User } = require("../sql_server_models");
 const bcrypt = require("bcrypt");
-const { random_string } = require("../lib");
+const { random_string, log_message } = require("../lib");
 var jwt = require("jsonwebtoken");
 
 /* GET users listing. */
@@ -58,6 +58,9 @@ router.post("/login", async function (req, res, _next) {
       find_user_via_username.password
     );
     if (match === false) {
+      const err_msg = "Error Login: Incorrect password!";
+      log_message(err_msg);
+
       const json_response = { msg: "Error Login!", status: "Error" };
       res.json(json_response);
     } else if (match === true) {
@@ -78,6 +81,9 @@ router.post("/login", async function (req, res, _next) {
   } else if (find_user_via_email !== null) {
     const match = await bcrypt.compare(password, find_user_via_email.password);
     if (match === false) {
+      const err_msg = "Error Login: Incorrect password!";
+      log_message(err_msg);
+
       res.send("Error Login!");
     } else if (match === true) {
       const token = jwt.sign(
@@ -92,6 +98,8 @@ router.post("/login", async function (req, res, _next) {
       res.json(json_response);
     }
   } else {
+    const err_msg = "Error Login: Account does not exist!";
+    log_message(err_msg);
     const json_response = { msg: "Error Login!", status: "Error" };
     res.json(json_response);
   }
