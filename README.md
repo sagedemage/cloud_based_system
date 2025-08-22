@@ -82,7 +82,41 @@ Check the version of the AWS CLI to verify it is installed
 aws --version
 ```
 
+## Setup DynamoDB on AWS
+Create a table called "LoginLogs". It has a Partition key called "logid" with `Number` as its type.
+
+Table name: LoginLogs
+
+Partition key:
+- logid: Number
+
+Attributes:
+- msg: String
+
+Create an item for the LoginLogs table.
+
+logid:
+- Value: 0
+- Type: Number
+
+msg:
+- Value: "Error Login: Account does not exist!"
+- Type: String
+
+JSON form:
+```
+{
+  "logid": {
+    "N": "0"
+  },
+  "msg": {
+    "S": "Error Login: Account does not exist!"
+  }
+}
+```
+
 ## Resources
 - [Installation - Sequelize](https://sequelize.org/docs/v6/getting-started/)
 - [Data Types - Sequelize](https://sequelize.org/docs/v7/models/data-types/)
 - [Installing or updating to the latest version of the AWS CLI - AWS](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [Choosing the Right DynamoDB Partition Key - AWS](https://aws.amazon.com/blogs/database/choosing-the-right-dynamodb-partition-key/)
