@@ -43,6 +43,37 @@ Remove docker container
 docker container rm -f -v 6c0d86736da5
 ```
 
+Check that the Cassandra container is running
+```
+docker exec 86dcd74e5666 nodetool status
+```
+
+### CQL Queries
+
+Go to the Cassandra container with the cqlsh command to get into the Cassandra shell
+```
+docker exec -it 86dcd74e5666 cqlsh
+```
+
+Show a list of tables
+```
+describe tables;
+```
+
+Get the logs and its information
+```
+select * from logger."Log";
+```
+
+Delete a keyspace
+```
+drop keyspace logger;
+```
+
+## Docker Desktop
+Set the Memory Limit to 6 GB in Settings -> Resources. This is necessary to avoid 
+the insufficient system memory issue.
+
 ## Setup AWS CLI
 Go to [Installing or updating to the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to install the AWS CLI.
 

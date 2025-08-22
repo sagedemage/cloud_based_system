@@ -4,7 +4,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-const { sequelize, Wave, User } = require("./models");
+const { sequelize, Wave, User } = require("./sql_server_models");
+let { models, LogModel } = require("./cassandra_models");
 
 require("dotenv").config();
 
@@ -66,3 +67,5 @@ async function query() {
 }
 
 query();
+
+console.log(models.instance.Log === LogModel);

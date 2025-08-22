@@ -34,6 +34,7 @@ nav {
 
 .auth {
   float: right;
+  margin-right: 60px;
 }
 
 .form-input {
@@ -66,7 +67,6 @@ nav {
   background-color: #ff639f;
   color: black;
   border: 5px solid #ff639f;
-  margin-right: 60px;
 }
 
 #dropdown-content {
