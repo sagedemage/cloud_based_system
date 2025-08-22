@@ -60,9 +60,14 @@ Show a list of tables
 describe tables;
 ```
 
-Get the roles and its information
+Get the logs and its information
 ```
-select * from system_auth.roles;
+select * from logger."Log";
+```
+
+Delete a keyspace
+```
+drop keyspace logger;
 ```
 
 ## Docker Desktop
