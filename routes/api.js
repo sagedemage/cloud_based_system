@@ -100,6 +100,7 @@ router.post("/login", async function (req, res, _next) {
   } else {
     const err_msg = "Error Login: Account does not exist!";
     log_message(err_msg);
+
     const json_response = { msg: "Error Login!", status: "Error" };
     res.json(json_response);
   }
