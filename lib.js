@@ -12,7 +12,7 @@ function get_cookie_value(cookie, cname) {
   let values = {};
 
   if (cookie === undefined) {
-    return null
+    return null;
   }
 
   let temp_values = cookie.split("; ");
@@ -42,5 +42,5 @@ function log_message(err_msg) {
 module.exports = {
   random_string,
   get_cookie_value,
-  log_message
+  log_message,
 };

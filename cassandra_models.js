@@ -38,5 +38,5 @@ LogModel.syncDB(function (err, result) {
 
 module.exports = {
   models,
-  LogModel
+  LogModel,
 };
