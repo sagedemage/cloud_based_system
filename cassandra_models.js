@@ -30,7 +30,7 @@ let LogModel = models.loadSchema("Log", {
   key: ["id"],
 });
 
-LogModel.syncDB(function (err, result) {
+LogModel.syncDB(function (err, _result) {
   if (err) {
     throw err;
   }
