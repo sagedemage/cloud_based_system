@@ -13,6 +13,7 @@ class LoginLogsRepository {
       Key: {
         logid: { S: logid },
       },
+      ProjectionExpression: "logid,msg"
     };
     const command = new GetItemCommand(params);
     const response = await db.send(command);
@@ -21,11 +22,13 @@ class LoginLogsRepository {
   }
 
   async create(msg) {
+    const date = new Date();
     const params = {
       TableName: this.tableName,
       Item: {
         logid: { S: uuidv4() },
         msg: { S: msg },
+        created: { S: date.toISOString() },
       },
     };
 
