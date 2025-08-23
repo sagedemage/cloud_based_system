@@ -92,28 +92,7 @@ Partition key:
 
 Attributes:
 - msg: String
-
-Create an item for the LoginLogs table.
-
-logid:
-- Value: e6c261c3-2bd0-4c19-bd96-2f787728fd9e
-- Type: String
-
-msg:
-- Value: "Error Login: Account does not exist!"
-- Type: String
-
-JSON form:
-```
-{
-  "logid": {
-    "S": "e6c261c3-2bd0-4c19-bd96-2f787728fd9e"
-  },
-  "msg": {
-    "S": "Error Login: Account does not exist!"
-  }
-}
-```
+- created: String
 
 ## Resources
 - [Installation - Sequelize](https://sequelize.org/docs/v6/getting-started/)
