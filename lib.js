@@ -1,5 +1,6 @@
 const { randomBytes } = require("node:crypto");
 let { models } = require("./cassandra_models");
+const LoginLogsService = require(`./modules/login_logs/service/login_logs.service`);
 
 function random_string(length) {
   if (length % 2 !== 0) {
@@ -24,7 +25,7 @@ function get_cookie_value(cookie, cname) {
   return values[cname];
 }
 
-function log_message(err_msg) {
+async function log_message(err_msg) {
   let log = new models.instance.Log({
     msg: err_msg,
     created: Date.now(),
@@ -37,6 +38,14 @@ function log_message(err_msg) {
     }
     console.log(err_msg);
   });
+
+  const response = await LoginLogsService.create(err_msg);
+
+  if (response.$metadata.httpStatusCode === 200) {
+    console.log("Added Login Log");
+  } else {
+    console.log("Unable to add a Login Log");
+  }
 }
 
 module.exports = {
