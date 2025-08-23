@@ -1,6 +1,8 @@
-# cloud_based_system
+# wave_data_system
 
-A system containing an Express server, SQL Server, and DynamoDB.
+A system where users can modify wave data. The system contains an Express server, SQL Server, Apache Cassandra, and DynamoDB.
+
+![Wave Data System](./screenshots/wave_data_system.png)
 
 ## Setup
 
