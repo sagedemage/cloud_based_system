@@ -71,18 +71,26 @@ drop keyspace logger;
 ```
 
 ## Docker Desktop
-Set the Memory Limit to 6 GB in Settings -> Resources. This is necessary to avoid 
+Set the Memory Limit to 6 GB in Settings &#8594; Resources. This is necessary to avoid
 the insufficient system memory issue.
 
-## Setup AWS CLI
-Go to [Installing or updating to the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to install the AWS CLI.
+## Setup DynamoDB on AWS
+Create a table called "LoginLogs". It has a Partition key called "logid" with `String` as its type.
 
-Check the version of the AWS CLI to verify it is installed
-```
-aws --version
-```
+Table name: LoginLogs
+
+Partition key:
+- logid: String
+
+Attributes:
+- msg: String
+- created: String
 
 ## Resources
 - [Installation - Sequelize](https://sequelize.org/docs/v6/getting-started/)
 - [Data Types - Sequelize](https://sequelize.org/docs/v7/models/data-types/)
-- [Installing or updating to the latest version of the AWS CLI - AWS](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [Choosing the Right DynamoDB Partition Key - AWS](https://aws.amazon.com/blogs/database/choosing-the-right-dynamodb-partition-key/)
+- [RESTful API with Node.js, Express, and DynamoDB - Medium](https://faerulsalamun.medium.com/restful-api-with-node-js-express-and-dynamodb-5059beb3ba7f)
+- [AWS SDK v3: Putting an Item - Intenics](https://blog.intenics.io/aws-sdk-v3-putting-an-item/)
+- [GetItemCommand - AWS SDK](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/command/GetItemCommand/)
+- [PutItemCommand - AWS SDK](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/command/PutItemCommand/)
