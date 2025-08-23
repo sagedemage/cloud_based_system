@@ -4,6 +4,7 @@ const { Wave, User } = require("../sql_server_models");
 const bcrypt = require("bcrypt");
 const { random_string, log_message } = require("../lib");
 var jwt = require("jsonwebtoken");
+const LoginLogsController = require("../modules/login_logs/controller/login_logs.controller")
 
 /* GET users listing. */
 router.post("/register", async function (req, res, _next) {
@@ -210,5 +211,8 @@ router.delete("/delete-wave", async function (req, res, _next) {
   const json_response = { msg: "Deleted the wave", status: "Success" };
   res.json(json_response);
 });
+
+router.post("/get-login-log", LoginLogsController.find_by_id)
+router.post("/add-login-log", LoginLogsController.create)
 
 module.exports = router;
