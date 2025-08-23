@@ -1,6 +1,6 @@
-# cloud_based_system
+# wave_data_system
 
-A system containing an Express server, SQL Server, and DynamoDB.
+A system containing an Express server, SQL Server, Apache Cassandra, and DynamoDB.
 
 ## Setup
 
