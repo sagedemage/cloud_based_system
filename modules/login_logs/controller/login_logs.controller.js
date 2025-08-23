@@ -17,8 +17,13 @@ class LoginLogsController {
         const msg = data.msg;
         const response = await LoginLogsService.create(msg)
 
-        const json_response = { msg: "Added Login Log", status: "Success" };
-        res.json(json_response);
+        if (response.$metadata.httpStatusCode === 200) {
+            const json_response = { msg: "Added Login Log", status: "Success" };
+            res.json(json_response);
+        } else {
+            const json_response = { msg: "Unable to add a Login Log", status: "Error" };
+            res.json(json_response);
+        }
     }
 }
 
