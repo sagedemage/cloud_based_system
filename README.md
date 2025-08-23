@@ -75,7 +75,7 @@ Set the Memory Limit to 6 GB in Settings &#8594; Resources. This is necessary to
 the insufficient system memory issue.
 
 ## Setup DynamoDB on AWS
-Create a table called "LoginLogs". It has a Partition key called "logid" with `Number` as its type.
+Create a table called "LoginLogs". It has a Partition key called "logid" with `String` as its type.
 
 Table name: LoginLogs
 
