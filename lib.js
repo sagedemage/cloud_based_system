@@ -1,6 +1,8 @@
 const { randomBytes } = require("node:crypto");
 let { models } = require("./cassandra_models");
-const LoginLogsService = require(`./modules/login_logs/service/login_logs.service`);
+const LoginLogsService = require(
+  `./modules/login_logs/service/login_logs.service`
+);
 
 function random_string(length) {
   if (length % 2 !== 0) {

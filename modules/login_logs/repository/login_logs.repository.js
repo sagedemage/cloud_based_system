@@ -13,7 +13,7 @@ class LoginLogsRepository {
       Key: {
         logid: { S: logid },
       },
-      ProjectionExpression: "logid,msg"
+      ProjectionExpression: "logid,msg",
     };
     const command = new GetItemCommand(params);
     const response = await db.send(command);
