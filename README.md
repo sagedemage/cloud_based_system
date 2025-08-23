@@ -1,6 +1,6 @@
 # wave_data_system
 
-A system where users can modify wave data. This system contains an Express server, SQL Server, Apache Cassandra, and DynamoDB.
+A system where users can modify wave data. The system contains an Express server, SQL Server, Apache Cassandra, and DynamoDB.
 
 ![Wave Data System](./screenshots/wave_data_system.png)
 
