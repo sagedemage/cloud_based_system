@@ -88,7 +88,7 @@ Create a table called "LoginLogs". It has a Partition key called "logid" with `N
 Table name: LoginLogs
 
 Partition key:
-- logid: Number
+- logid: String
 
 Attributes:
 - msg: String
@@ -96,8 +96,8 @@ Attributes:
 Create an item for the LoginLogs table.
 
 logid:
-- Value: 0
-- Type: Number
+- Value: e6c261c3-2bd0-4c19-bd96-2f787728fd9e
+- Type: String
 
 msg:
 - Value: "Error Login: Account does not exist!"
@@ -107,7 +107,7 @@ JSON form:
 ```
 {
   "logid": {
-    "N": "0"
+    "S": "e6c261c3-2bd0-4c19-bd96-2f787728fd9e"
   },
   "msg": {
     "S": "Error Login: Account does not exist!"
@@ -120,3 +120,7 @@ JSON form:
 - [Data Types - Sequelize](https://sequelize.org/docs/v7/models/data-types/)
 - [Installing or updating to the latest version of the AWS CLI - AWS](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - [Choosing the Right DynamoDB Partition Key - AWS](https://aws.amazon.com/blogs/database/choosing-the-right-dynamodb-partition-key/)
+- [RESTful API with Node.js, Express, and DynamoDB - Medium](https://faerulsalamun.medium.com/restful-api-with-node-js-express-and-dynamodb-5059beb3ba7f)
+- [AWS SDK v3: Putting an Item - Intenics](https://blog.intenics.io/aws-sdk-v3-putting-an-item/)
+- [GetItemCommand - AWS SDK](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/command/GetItemCommand/)
+- [PutItemCommand - AWS SDK](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/command/PutItemCommand/)
