@@ -4,7 +4,7 @@ class LoginLogsService {
   async find_by_id(logid) {
     const data = await LoginLogsRepository.find_by_id(logid);
 
-    if (data) {
+    if (data.Item !== undefined) {
       return data.Item;
     }
 
