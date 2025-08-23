@@ -71,7 +71,7 @@ drop keyspace logger;
 ```
 
 ## Docker Desktop
-Set the Memory Limit to 6 GB in Settings -> Resources. This is necessary to avoid 
+Set the Memory Limit to 6 GB in Settings &#8594; Resources. This is necessary to avoid
 the insufficient system memory issue.
 
 ## Setup AWS CLI
